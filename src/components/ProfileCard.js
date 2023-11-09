@@ -17,7 +17,6 @@ function ProfileCard(props) {
 			<h2 className="normal-text">{props.phone}</h2>
 			<h2 className="normal-text">{props.email}</h2>
 			<h2 className="normal-text">{props.city}</h2>
-			<h2 className="normal-text">{props.hobby}</h2>
 		</div>
 	);
 }

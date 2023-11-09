@@ -17,7 +17,6 @@ const Profile = () => {
                 phone="+21 213 838 12"
                 email="charlieputh12@gmail.com"
 				city="5A Ohio street, Ohio, USA"
-                hobby="Reading books, Singing"
 			></ProfileCard>
 
 		</div>
