@@ -16,6 +16,8 @@ import Container from '@mui/material/Container';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import AuthService from "../services/auth.service";
+
 
 function Copyright(props) {
     return (
@@ -66,30 +68,26 @@ export default function SignIn() {
         const data = new FormData(event.currentTarget);
         const email = data.get('email');
         const password = data.get('password');
+
         if (!email || !password) {
             showAlert('Email and password are required.', 'error');
             return;
         }
-        try {
-            const response = await axios.post('http://localhost:8080/auth/signin', {
-                email: data.get('email'),
-                password: data.get('password'),
-            });
 
-            const { token } = response.data;
-            localStorage.setItem('email', data.get('email'));
-            localStorage.setItem('token', token);
-
-            showAlert('Sign-in successful', 'success');
-            navigate('/');
-        } catch (error) {
-            if (error.response && error.response.status === 401) {
-                showAlert('Invalid email or password. Please try again.', 'error');
-            } else {
-                console.error('Error during sign-in:', error);
-                showAlert('An unexpected error occurred. Please try again later.', 'error');
-            }
-        }
+        AuthService.signin(email, password).then(
+          () => {
+              showAlert('Sign-in successful', 'success');
+              navigate('/');
+          },
+          (error) => {
+              if (error.response && error.response.status === 401) {
+                  showAlert('Invalid email or password. Please try again.', 'error');
+              } else {
+                  console.error('Error during sign-in:', error);
+                  showAlert('An unexpected error occurred. Please try again later.', 'error');
+              }
+          }
+        )
     };
 
     return (
