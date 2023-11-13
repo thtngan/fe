@@ -12,10 +12,21 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Button from "@mui/material/Button";
+import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 export default function MenuAppBar() {
-  const [auth, setAuth] = React.useState(true);
+  const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  useEffect(() => {
+    if (localStorage.getItem('email') != null) {
+      setAuth(true);
+    }
+  }, [])
+
+
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -29,20 +40,20 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
 
+  const navigateProfilePage = () => {
+    navigate("/profile");
+    window.location.reload();
+  };
+
+  const handleLogOut = () => {
+    localStorage.removeItem("email");
+    localStorage.removeItem("token");
+    setAuth(false);
+    window.location.reload();
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -77,8 +88,8 @@ export default function MenuAppBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Log Out</MenuItem>
+                <MenuItem onClick={navigateProfilePage}>Profile</MenuItem>
+                <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
               </Menu>
             </div>
           )}
