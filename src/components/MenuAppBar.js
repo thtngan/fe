@@ -12,7 +12,7 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Button from "@mui/material/Button";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 
 export default function MenuAppBar() {
@@ -56,8 +56,10 @@ export default function MenuAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            PHOTOS
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} >
+            <Link to={"/"} style={{ textDecoration: 'none', color: 'white', fontWeight: "bold" }}>
+              PHOTOS
+            </Link>
           </Typography>
 
           {auth && (

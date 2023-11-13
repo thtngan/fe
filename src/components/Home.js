@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ResponsiveAppBar from "./MenuAppBar";
+import MenuAppBar from "./MenuAppBar";
 
 function Copyright(props) {
   return (
@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-     <ResponsiveAppBar />
+     <MenuAppBar />
       <main>
         {/* Hero unit */}
         <Box
