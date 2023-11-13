@@ -8,6 +8,7 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import ProfileCard from "./ProfileCard";
 import UpdateProfileCard from "./UpdateProfileCard";
+import {useLocation} from "react-router-dom";
 
 function Copyright(props) {
 	return (
@@ -25,15 +26,11 @@ function Copyright(props) {
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-const Profile = () => {
-	const [user, setUser] = useState('');
+const UpdateProfile = () => {
+	const location = useLocation();
+	const user = location.state.user;
+	console.log(location)
 
-	useEffect(() => {
-		AuthService.getUserByEmail().then((res) => {
-			// console.log(res);
-			setUser(res)
-		});
-	}, [])
 
 	return (
 		<ThemeProvider theme={defaultTheme}>
@@ -41,7 +38,7 @@ const Profile = () => {
 			<MenuAppBar />
 
 			<main>
-				<ProfileCard
+				<UpdateProfileCard
 					name={user.name}
 					age={user.age}
 					job={user.job}
@@ -60,5 +57,5 @@ const Profile = () => {
 	);
 };
 
-export default Profile;
+export default UpdateProfile;
 
