@@ -30,8 +30,18 @@ const getUserByEmail = async () => {
   }
 };
 
+const signup = async (formData) => {
+  try {
+    const response = await axios.post(API_URL + "auth/signup", formData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const AuthService = {
   signin,
+  signup,
   getUserByEmail
 }
 
